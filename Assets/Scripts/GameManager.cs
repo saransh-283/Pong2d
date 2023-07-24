@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject enemy;
     public GameObject ball;
     public GameObject ballPrefab;
+
+    // References to the score TextMeshProUGUI components
+    public TextMeshProUGUI playerScoreText;
+    public TextMeshProUGUI enemyScoreText;
 
     // Reference to the active player (player or enemy) during the round
     public GameObject activePlayer;
@@ -28,6 +33,9 @@ public class GameManager : MonoBehaviour
     public float maxY = 3.5f;
 
     float offset = 0.4f; // Offset used to position the ball at the start of each round
+
+    public float playerScore = 0f;
+    public float enemyScore = 0f;
 
     private void Awake()
     {
@@ -59,6 +67,17 @@ public class GameManager : MonoBehaviour
     // Handle the end of a round
     public void RoundEnd(bool turn)
     {
+        if(!turn) // If the player won the round
+        {
+            playerScore++; // Increment the player's score
+            playerScoreText.text = playerScore.ToString(); // Update the player's score text
+        }
+        else // If the enemy won the round
+        {
+            enemyScore++; // Increment the enemy's score
+            enemyScoreText.text = enemyScore.ToString(); // Update the enemy's score text
+        }
+
         Destroy(ball); // Destroy the ball
         playerTurn = turn; // Switch the player turn
 
