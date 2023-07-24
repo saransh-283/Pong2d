@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;  // The speed at which the player can move up and down
-    public float minY = -3.5f;  // The minimum Y position the player can move to
-    public float maxY = 3.5f;   // The maximum Y position the player can move to
+    public float minY = -3.8f;  // The minimum Y position the player can move to
+    public float maxY = 3.8f;   // The maximum Y position the player can move to
 
     private void Update()
     {

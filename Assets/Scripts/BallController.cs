@@ -53,16 +53,16 @@ public class BallController : MonoBehaviour
 
                 // Get horizontal input to rotate the ball left or right
                 float horizontalInput = Input.GetAxis("Horizontal");
-                if (horizontalInput != 0)
+                if (horizontalInput != 0 && transform.rotation.eulerAngles.z < maxAngle && transform.rotation.eulerAngles.z > minAngle)
                 {
                     // Rotate the ball smoothly based on the horizontal input, clamped between minAngle and maxAngle
-                    transform.Rotate(0, 0, Mathf.Clamp(-horizontalInput * rotateSpeed * Time.deltaTime, minAngle, maxAngle));
+                    transform.Rotate(0, 0, -horizontalInput * rotateSpeed * Time.deltaTime);
                 }
             }
             else
             {
                 // If it's not the player's turn, rotate the ball towards the enemy's target angle
-                if (transform.rotation.eulerAngles.z < 180f + EnemyTargetAngle)
+                if (transform.rotation.eulerAngles.z < 180f + EnemyTargetAngle && transform.rotation.eulerAngles.z < 180 + maxAngle && transform.rotation.eulerAngles.z > 180 + minAngle)
                 {
                     // Get the sign of the enemy target angle to determine the rotation direction
                     float sign = Mathf.Sign(EnemyTargetAngle);
